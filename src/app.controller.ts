@@ -11,11 +11,7 @@ export class AppController {
   }
 
   @Get("/weather")
-  getWeatherData() {
-    let weatherData = {
-      "city":"pune",
-      "temp": 30
-    };
-    return weatherData;
+  async getWeatherData(): Promise<any> {
+    return this.appService.getWeatherData(this.appService.getCityList());
   }
 }
