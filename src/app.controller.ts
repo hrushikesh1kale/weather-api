@@ -9,9 +9,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Get("/weather")
-  async getWeatherData(): Promise<any> {
-    return this.appService.getWeatherData(this.appService.getCityList());
-  }
 }
