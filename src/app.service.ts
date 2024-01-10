@@ -15,8 +15,7 @@ export class AppService {
   }
 
   async getCityWeather(city: string) {
-    const key = "";
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=city&appid=${key}`;
+    let url = `http://api.openweathermap.org/data/2.5/weather?q=city&appid=${process.env.key}`;
     
     let response = await axios.get(url);
     return response.data;
