@@ -7,7 +7,6 @@ export class CityService {
         let cityList: string[];
         try {
             cityList = JSON.parse(readFileSync('city-list.json', 'utf-8'));
-            console.log(cityList);
         } catch(error) {
             console.log('cannot open file city-list.json');
         }
