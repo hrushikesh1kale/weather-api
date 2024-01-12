@@ -14,8 +14,4 @@ export class CityService {
     async addCity(city: City) {
         this.cityModel.create(city)
     }
-    async writeFile(fileName: string, data: string) {
-        writeFileSync(fileName, data);
-    }
-
 }
