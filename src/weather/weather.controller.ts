@@ -8,7 +8,6 @@ export class WeatherController {
 
     @Get()
     async getWeather() {
-        const cityList: string[] = this.cityService.getAllCities();
-        return this.weatherService.getWeather(cityList);
+        return this.weatherService.getWeather(await this.cityService.getAllCities());
     }
 }
