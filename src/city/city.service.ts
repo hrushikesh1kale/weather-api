@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { readFileSync, writeFileSync } from "fs";
 import { City } from "./city.schema";
 import { Model } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
