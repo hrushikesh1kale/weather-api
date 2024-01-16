@@ -4,6 +4,7 @@ import { configDotenv } from 'dotenv';
 declare const module: any;
 
 async function bootstrap() {
+  console.log(process.env.DB_URI);
   configDotenv()
   const app = await NestFactory.create(AppModule);
   await app.listen(3000);
