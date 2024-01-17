@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [CityModule, WeatherModule, AuthModule, MongooseModule.forRoot('mongodb://database:27017', {
+  imports: [CityModule, WeatherModule, AuthModule, MongooseModule.forRoot(process.env.DB_URI, {
     dbName:process.env.DB_NAME,
     auth: {
       username: process.env.DB_USERNAME,

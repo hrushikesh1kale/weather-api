@@ -5,6 +5,11 @@ declare const module: any;
 
 async function bootstrap() {
   console.log(process.env.DB_URI);
+  console.log();
+  console.log();
+  console.log();
+  console.log();
+  console.log();
   configDotenv()
   const app = await NestFactory.create(AppModule);
   await app.listen(3000);
