@@ -14,7 +14,6 @@ import { MongooseModule } from '@nestjs/mongoose';
       password: process.env.DB_PASSWORD,
     },
   })],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
