@@ -5,12 +5,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 declare const module: any;
 
 async function bootstrap() {
-  console.log(process.env.DB_URI);
-  console.log();
-  console.log();
-  console.log();
-  console.log();
-  console.log();
   configDotenv()
   const app = await NestFactory.create(AppModule);
 
@@ -24,6 +18,7 @@ async function bootstrap() {
     .setDescription('Add cities to database and fetch weather of configured cities from openweathermap.org')
     .addTag('weather')
     .setBasePath('/swagger')
+    .addBasicAuth()
     .build();
 
 
@@ -32,7 +27,6 @@ async function bootstrap() {
 
   await app.listen(3000);
 
-  console.log(document);
-
 }
 bootstrap();
+

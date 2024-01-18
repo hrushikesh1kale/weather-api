@@ -6,9 +6,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { City, CitySchema } from './city.schema';
 
 @Module({
-    controllers:[CityController],
-    providers:[CityService],
-    exports:[CityService],
-    imports:[AuthModule, MongooseModule.forFeature([{name: City.name ,schema: CitySchema}])]
+  controllers: [CityController],
+  providers: [CityService],
+  exports: [CityService],
+  imports: [
+    AuthModule,
+    MongooseModule.forFeature([{ name: City.name, schema: CitySchema }]),
+  ],
 })
 export class CityModule {}
