@@ -1,3 +1,4 @@
 FROM nginx:latest
-
-COPY ./nginx.conf /etc/nginx/conf.d/
+WORKDIR /etc/nginx/
+COPY  nginx.conf /etc/nginx/
+COPY .htpasswd /etc/nginx/
