@@ -22,7 +22,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     volumes:
-      - ./nginx:/etc/nginx/conf.d/
+      - ./nginx:/etc/nginx/
     ports:
       - 80:80
     depends_on:
