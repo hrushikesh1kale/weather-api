@@ -7,7 +7,7 @@ import { InjectModel } from '@nestjs/mongoose';
 export class CityService {
   constructor(@InjectModel('City') private cityModel: Model<City>) {}
 
-  getAllCities() {
+  async getAllCities(): Promise<City[]> {
     return this.cityModel.find();
   }
   async addCity(city: City) {

@@ -1,8 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Res } from '@nestjs/common';
 import { CityService } from 'src/city/city.service';
 import { WeatherService } from './weather.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { WeatherDto } from './weather.dto';
+import { City } from 'src/city/city.schema';
+import { response } from 'express';
 
 @ApiTags('Weather')
 @Controller('/weather')
@@ -20,8 +22,7 @@ export class WeatherController {
   })
   @Get()
   async getWeather(): Promise<WeatherDto[]> {
-    return this.weatherService.getWeather(
-      await this.cityService.getAllCities(),
-    );
+    const cityList: City[] = await this.cityService.getAllCities();
+    return await this.weatherService.getWeather(cityList);
   }
 }

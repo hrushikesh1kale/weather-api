@@ -5,8 +5,8 @@ import { WeatherDto } from './weather.dto';
 
 @Injectable()
 export class WeatherService {
-  async getWeather(cityList: City[]): Promise<WeatherDto[]> {
-    const weatherData: WeatherDto[] = [];
+  async getWeather(cityList: City[]): Promise<any[]> {
+    const weatherData: any[] = [];
     for (let city of cityList) {
       try {
         const response = await axios.get(
@@ -22,7 +22,10 @@ export class WeatherService {
           country: response.data.sys.country,
         });
       } catch (exception) {
-        console.log(exception);
+        weatherData.push({
+          cityName: city.name,
+          error:"Could not fetch data"
+        });
       }
     }
     return weatherData;
