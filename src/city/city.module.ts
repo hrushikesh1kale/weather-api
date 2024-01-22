@@ -4,6 +4,7 @@ import { CityService } from './city.service';
 import { AuthModule } from 'src/auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { City, CitySchema } from './city.schema';
+import { WeatherModule } from 'src/weather/weather.module';
 
 @Module({
   controllers: [CityController],

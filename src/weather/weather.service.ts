@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { City } from 'src/city/city.schema';
-import { WeatherDto } from './weather.dto';
 
 @Injectable()
 export class WeatherService {

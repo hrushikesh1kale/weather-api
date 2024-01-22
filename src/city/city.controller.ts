@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpException, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { CityService } from './city.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiBasicAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -18,7 +18,14 @@ export class CityController {
   })
   @Post()
   async addCity(@Body() body: CreateCityDto) {
-    this.cityService.addCity({ name: body.name });
-    return `${body.name} added to list of cities`;
+    if(body.name == undefined || body.name == "") {
+      throw new HttpException("Please specify a city name", HttpStatus.BAD_REQUEST);
+    }
+    try {
+      this.cityService.addCity({name: body.name});
+      return `${body.name} added to list of cities`;
+    } catch (exception) {
+      throw new HttpException('Could not add city to database', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
