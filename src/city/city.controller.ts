@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, HttpException, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { CityService } from './city.service';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { ApiBasicAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCityDto } from './create.city.dto';
 

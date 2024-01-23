@@ -1,10 +1,9 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { CityService } from 'src/city/city.service';
 import { WeatherService } from './weather.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { WeatherDto } from './weather.dto';
 import { City } from 'src/city/city.schema';
-import { response } from 'express';
 
 @ApiTags('Weather')
 @Controller('/weather')
