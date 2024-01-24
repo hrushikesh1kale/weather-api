@@ -13,7 +13,7 @@ export class WeatherService {
         );
         weatherData.push({
           cityName: city.name,
-          weather: response.data.weather,
+          weather: response.data.weather[0],
           visibility: response.data.visibility,
           wind: response.data.wind,
           main: response.data.main,

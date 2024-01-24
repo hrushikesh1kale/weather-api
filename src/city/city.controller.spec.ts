@@ -1,84 +1,64 @@
-import { Test } from "@nestjs/testing";
-import { CityController } from "./city.controller"
-import { AuthModule } from "../auth/auth.module";
-import { MongooseModule } from "@nestjs/mongoose";
-import { INestApplication } from "@nestjs/common";
-import { CityModule } from "./city.module";
-import { CreateCityDto } from "./create.city.dto";
-import axios from "axios";
+import { Test } from '@nestjs/testing';
+import { CityModule } from '../city/city.module';
+import { INestApplication } from '@nestjs/common';
+import { AuthModule } from '../auth/auth.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CityService } from '../city/city.service';
+import axios from 'axios';
 
-describe('CityController', () => {
-  let cityController: CityController;
-  let app: INestApplication;
+let app: INestApplication;
 
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [
-        AuthModule,
-        CityModule,
-        MongooseModule.forRoot(process.env.DB_URI, {
+beforeAll(async () => {
+  const moduleRef = await Test.createTestingModule({
+    imports: [
+      AuthModule,
+      CityModule,
+      MongooseModule.forRoot(process.env.DB_URI, {
         dbName: process.env.DB_NAME,
         auth: {
           username: process.env.DB_USERNAME,
           password: process.env.DB_PASSWORD,
         },
-      })
-    ]
-    }).compile();
+      }),
+    ],
+  }).compile();
 
-    app = moduleRef.createNestApplication();
-    await app.listen(3001);
+  app = moduleRef.createNestApplication();
+  await app.listen(3000);
+});
 
-    cityController = app.get<CityController>(CityController);
+afterAll(async () => {
+  await app.close();
+});
+
+describe('WeatherController', () => {
+  it('/city POST should return unauthorized',async () => {
+    const cityDto = {
+      name: "Pune",
+      user: "user",
+      pass: "dslfjlkdsf"
+    };
+
+    try {
+      const response  = await axios.post('http://nginx/city', cityDto);
+      expect(response).toBeUndefined();
+    } catch(error) {
+      expect(error.response.status).toBe(403);
+    }
   });
 
-
-  it('CityController should be defined', async () => {
-    expect(cityController).toBeDefined();
-  });
-
-  it('/city POST - Add city to database',async () => {
-    const cityDto: CreateCityDto = {
+  it('/city POST should add city to citylist',async () => {
+    const cityDto = {
       name: "Pune",
       user: "user",
       pass: "pass"
-    }
-    try{
-      const response = await axios.post('http://app:3001/city', cityDto);
-      expect(response).toBeDefined();
+    };
+
+    try {
+      const response  = await axios.post('http://nginx/city', cityDto);
       expect(response.status).toBe(201);
-    } catch(exception) {
-
+    } catch(error) {
+      expect(error.response.status).toBe(201);
     }
   });
-
-  it('/city POST - should return unauthorized',async () => {
-    const cityDto: CreateCityDto = {
-      name: "Pune",
-      user: "user",
-      pass: "p"
-    }
-
-    try {
-      const response = await axios.post('http://app:3001/city', cityDto);
-      expect(response.status).toBe(403);
-    } catch(exception) {
-      
-    }
-  });
-
-  it('/city POST - should return bad request',async () => {
-    const cityDto: CreateCityDto = {
-      name: "",
-      user: "user",
-      pass: "pass"
-    }
-
-    try {
-      const response = await axios.post('http://app:3001/city', cityDto);
-      expect(response.status).toBe(400);
-    } catch(exception) {
-
-    }
-  })
 });

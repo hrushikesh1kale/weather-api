@@ -11,6 +11,6 @@ export class CityService {
     return this.cityModel.find();
   }
   async addCity(city: City) {
-    this.cityModel.create(city);
+    return this.cityModel.create(city);
   }
 }

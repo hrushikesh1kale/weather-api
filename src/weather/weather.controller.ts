@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { CityService } from 'src/city/city.service';
+import { CityService } from '../city/city.service';
 import { WeatherService } from './weather.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { WeatherDto } from './weather.dto';
